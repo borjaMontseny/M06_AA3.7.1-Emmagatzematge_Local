@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Exemple LS</title>
+</head>
+
+<body>
+
+    <!-- Input para el nombre -->
+    <input type="text" placeholder="Nom" id="nom">
+
+    <!-- Input para el apellido -->
+    <input type="text" placeholder="Cognom" id="cognom">
+
+    <!-- Botón para guardar datos -->
+    <button id="btnDesar">Desar dades</button>
+
+    <!-- Botón para eliminar datos -->
+    <button id="btnEliminar">Eliminar dades</button>
+
+    <!-- Botón para mostrar datos -->
+    <button id="btnMostrar">Mostrar</button>
+
+    <script>
+        // Evento al hacer clic en "Desar dades"
+        document.getElementById("btnDesar").addEventListener("click", function () {
+            var nom = document.getElementById("nom").value;
+            var cognom = document.getElementById("cognom").value;
+            localStorage.setItem("nom", nom);
+            localStorage.setItem("cognom", cognom);
+        }, false);
+
+        // Evento al hacer clic en "Eliminar dades"
+        document.getElementById("btnEliminar").addEventListener("click", function () {
+            localStorage.removeItem("nom");
+            localStorage.removeItem("cognom");
+        }, false);
+
+        // Evento al hacer clic en "Mostrar"
+        document.getElementById("btnMostrar").addEventListener("click", function () {
+            var nom = localStorage.getItem("nom");
+            var cognom = localStorage.getItem("cognom");
+            alert(nom + " " + cognom);
+        }, false);
+    </script>
+
+</body>
+
+</html>
