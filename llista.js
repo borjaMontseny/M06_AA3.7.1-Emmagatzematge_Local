@@ -36,7 +36,7 @@ function imprimirProductes() {
 
     for (let index = 0; index < arrayProductes2.length; index++) {
 
-
+        
 
     }
 
