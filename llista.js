@@ -9,14 +9,28 @@ function recollirDades() {
     // En aquest array guardarem les 3 dades de cada producte
     var arrayProducte = [];
 
+    var producteValue = producte.value;
+    var quantitatValue = quantitat.value;
+    var marcaValue = marca.value;
+
     // Afegim les dades del producte a l'array de producte
-    arrayProducte.push(producte.value, quantitat.value, marca.value);
+    arrayProducte.push(producteValue, quantitatValue, marcaValue);
 
     // Afegim aquest arrayProducte a l'array de Productes
     arrayProductes.push(arrayProducte);
 
     // Reescribim literalment el arrayProductes de LocalStorage cada cop
     localStorage.setItem('arrayProductes', JSON.stringify(arrayProductes));
+
+    arrayProductes2 = JSON.parse(localStorage.getItem("arrayProductes"));
+
+    console.log(arrayProductes2[0]);
+    imprimirProducte(arrayProductes2[0]);
+
+    // netejar els inputs, quantitat.value = 1, tal i com ho hem trobat
+    producte.value = "";
+    quantitat.value = 1;
+    marca.value = "";
 }
 
 // assignem les variables als elements HTML
@@ -29,61 +43,33 @@ function init() {
     botoAfegir.addEventListener("click", recollirDades, false);
 }
 
-function imprimirProducte(element) {
-
+function imprimirProducte(arrayProducte) {
     var divContenidor = document.getElementsByClassName("w3-container")[1];
 
-    // Creem el div i li afegim la classe:
-    var primerDiv = document.createElement("div");
-    primerDiv.setAttribute("class", "w3-card-4 w3-margin-bottom w3-hover-teal");
+    // Creamos el HTML con InnerHTML
+    var productHtml =
+        `<div class="w3-card-4 w3-margin-bottom w3-hover-teal">
+            <div class="w3-padding w3-xlarge">
+                <span data-quantitat="${arrayProducte[0]}" data-marca="${arrayProducte[1]}">${arrayProducte[2]}
+                    <span class="w3-right">
+                        <i class="material-icons w3-hover-text-amber" style="cursor: pointer;" onclick="infoProduct(this)">info_outline</i>
+                        <i class="material-icons w3-hover-text-amber" style="cursor: hand;" onclick="upProduct(this)">keyboard_arrow_up</i>
+                        <i class="material-icons w3-hover-text-amber" style="cursor: hand;" onclick="downProduct(this)">keyboard_arrow_down</i>
+                        <i class="material-icons w3-hover-text-red" style="cursor: hand;" onclick="deleteProduct(this)">delete_outline</i>
+                    </span>
+                </span>
+            </div>
+        </div>`;
 
-    // Inserim el div com a fill de divContenidor
-    divContenidor.appendChild(primerDiv);
-
-    // I ho repetim amb els demés elements que formen un producte
-    var segonDiv = document.createElement("div");
-    segonDiv.setAttribute("class", "w3-padding w3-xlarge");
-
-    var primerSpan = document.createElement("span");
-    primerSpan.setAttribute("data-quantitat", element.quantitat);
-    primerSpan.setAttribute("data-marca", element.marca);
-    primerSpan.textContent = element.producte;
-    segonDiv.appendChild(primerSpan);
-
-    var segonSpan = document.createElement("span");
-    segonSpan.setAttribute("class", "w3-right");
-    primerSpan.appendChild(segonSpan);
-
-    var primerI = document.createElement("i");
-    primerI.setAttribute("class", "material-icons w3-hover-text-amber");
-    primerI.setAttribute("style", "cursor: pointer;");
-    primerI.setAttribute("onclick", "infoProduct(this)");
-    primerI.textContent = "info_outline";
-    segonSpan.appendChild(primerI);
-
-    var segonI = document.createElement("i");
-    segonI.setAttribute("class", "material-icons w3-hover-text-amber");
-    segonI.setAttribute("style", "cursor: pointer;");
-    segonI.setAttribute("onclick", "infoProduct(this)");
-    segonI.textContent = "info_outline";
-    segonSpan.appendChild(segonI);
-
-    var tercerI = document.createElement("i");
-    tercerI.setAttribute("class", "material-icons w3-hover-text-amber");
-    tercerI.setAttribute("style", "cursor: pointer;");
-    tercerI.setAttribute("onclick", "infoProduct(this)");
-    tercerI.textContent = "info_outline";
-    segonSpan.appendChild(tercerI);
-
-
-
+    divContenidor.innerHTML += productHtml;
 }
 
-function representarArrayProductes() {
+function representarArrayProductes() { // en pruebas, no usar
 
     // Recuperem arrayProductes de LocalStorage
-    arrayProductes2 = JSON.parse(localStorage.getItem("arrayProductes"));
+    // arrayProductes2 = JSON.parse(localStorage.getItem("arrayProductes"));
 
+    console.log(arrayProductes2);
     for (let index = (arrayProductes2.length - 1); index >= 0; index--) {
         imprimirProducte(arrayProductes2[index]);
     }
