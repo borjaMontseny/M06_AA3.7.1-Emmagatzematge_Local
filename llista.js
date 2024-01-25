@@ -29,14 +29,44 @@ function init() {
     botoAfegir.addEventListener("click", recollirDades, false);
 }
 
-function imprimirProductes() {
+function imprimirProducte(element) {
+
+    var divContenidor = document.getElementsByClassName("w3-container")[1];
+
+    // Creem el div i li afegim la classe:
+    var primerDiv = document.createElement("div");
+    primerDiv.setAttribute("class", "w3-card-4 w3-margin-bottom w3-hover-teal");
+
+    // Inserim el div com a fill de divContenidor
+    divContenidor.appendChild(primerDiv);
+
+    // I ho repetim amb els demés elements que formen un producte
+    var segonDiv = document.createElement("div");
+    segonDiv.setAttribute("class", "w3-padding w3-xlarge");
+
+    var primerSpan = document.createElement("span");
+    primerSpan.setAttribute("data-quantitat", element.quantitat);
+    primerSpan.setAttribute("data-marca", element.marca);
+    primerSpan.textContent = element.producte;
+    segonDiv.appendChild(primerSpan);
+
+    var segonSpan = document.createElement("span");
+    segonSpan.setAttribute("class", "w3-right");
+    primerSpan.appendChild(segonSpan);
+
+    
+
+
+}
+
+function representarArrayProductes() {
 
     // Recuperem arrayProductes de LocalStorage
     arrayProductes2 = JSON.parse(localStorage.getItem("arrayProductes"));
 
     for (let index = 0; index < arrayProductes2.length; index++) {
 
-        
+
 
     }
 
