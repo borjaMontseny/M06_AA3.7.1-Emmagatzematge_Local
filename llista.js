@@ -54,7 +54,27 @@ function imprimirProducte(element) {
     segonSpan.setAttribute("class", "w3-right");
     primerSpan.appendChild(segonSpan);
 
-    
+    var primerI = document.createElement("i");
+    primerI.setAttribute("class", "material-icons w3-hover-text-amber");
+    primerI.setAttribute("style", "cursor: pointer;");
+    primerI.setAttribute("onclick", "infoProduct(this)");
+    primerI.textContent = "info_outline";
+    segonSpan.appendChild(primerI);
+
+    var segonI = document.createElement("i");
+    segonI.setAttribute("class", "material-icons w3-hover-text-amber");
+    segonI.setAttribute("style", "cursor: pointer;");
+    segonI.setAttribute("onclick", "infoProduct(this)");
+    segonI.textContent = "info_outline";
+    segonSpan.appendChild(segonI);
+
+    var tercerI = document.createElement("i");
+    tercerI.setAttribute("class", "material-icons w3-hover-text-amber");
+    tercerI.setAttribute("style", "cursor: pointer;");
+    tercerI.setAttribute("onclick", "infoProduct(this)");
+    tercerI.textContent = "info_outline";
+    segonSpan.appendChild(tercerI);
+
 
 
 }
@@ -64,10 +84,8 @@ function representarArrayProductes() {
     // Recuperem arrayProductes de LocalStorage
     arrayProductes2 = JSON.parse(localStorage.getItem("arrayProductes"));
 
-    for (let index = 0; index < arrayProductes2.length; index++) {
-
-
-
+    for (let index = (arrayProductes2.length - 1); index >= 0; index--) {
+        imprimirProducte(arrayProductes2[index]);
     }
 
 }
